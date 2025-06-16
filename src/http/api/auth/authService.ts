@@ -5,7 +5,7 @@ export const loginDashboard = async (
   senha: string,
   remember = false
 ) => {
-  const response = await api.post("/login/dashboard", { email, senha });
+const response = await api.post("/login/dashboard", { email, senha });
 
   console.log("response.data", response.data);
 

@@ -2,15 +2,29 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { loginDashboard } from "@/http/api/auth/authService";
 
 export default function Login() {
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [remember, setRemember] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ email, password });
+    setError("");
+
+    try {
+      const userData = await loginDashboard(email, password, remember);
+      const token =
+        userData?.token || userData?.accessToken || userData?.tokenJWT;
+      login(token, userData, remember, "/dashboard"); // redireciona para o painel
+    } catch (err: any) {
+      setError(err.message || "Erro ao fazer login");
+    }
   };
 
   return (
@@ -77,7 +91,6 @@ export default function Login() {
                   />
                 </svg>
               ) : (
-                // eye icon (SVG)
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -102,12 +115,28 @@ export default function Login() {
             </button>
           </div>
 
+          <label className="text-sm text-gray-600 flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={remember}
+              onChange={(e) => setRemember(e.target.checked)}
+              className="accent-[#FACC15]"
+            />
+            Permanecer conectado
+          </label>
+
           <button
             type="submit"
             className="bg-[#FEF08A] hover:bg-[#FDE047] text-[#1E293B] font-semibold py-3 rounded transition"
           >
             Entrar
           </button>
+
+          {error && (
+            <p className="text-sm text-red-500 text-center font-medium">
+              {error}
+            </p>
+          )}
         </form>
 
         <p className="text-center text-xs text-gray-500 mt-6">

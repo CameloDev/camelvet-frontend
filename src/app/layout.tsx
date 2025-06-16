@@ -1,33 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./styles/globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { ReactNode } from "react";
+import { AuthProvider } from "@/contexts/AuthContext";
+import "@/styles/globals.css";
 
 export const metadata: Metadata = {
   title: "CamelVet - Login",
   description: "CamelVet - Sistema de Gestão Veterinária",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="pt-BR">
+      <head>
+        <title>CamelVet</title>
+        {/* Outros elementos head que desejar */}
+      </head>
+      <body>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
