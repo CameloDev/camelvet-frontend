@@ -9,7 +9,6 @@ export default function Login() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Aqui você conecta com sua lógica real de autenticação
     alert(`Entrando com ${email}`);
   };
 
