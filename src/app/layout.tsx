@@ -13,7 +13,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="pt-BR">
       <head>
         <title>CamelVet</title>
-        {/* Outros elementos head que desejar */}
       </head>
       <body>
         <AuthProvider>
