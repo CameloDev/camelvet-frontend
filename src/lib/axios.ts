@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080/",
   timeout: 150000, // 150 segundos irei mudar mas como ainda sou pobre e nao tenho um servidor pago terei que buscar do render e é lento
   headers: {
