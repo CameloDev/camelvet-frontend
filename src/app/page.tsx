@@ -9,61 +9,59 @@ export default function Login() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Entrando com ${email}`);
+    console.log({ email, password });
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-tr from-green-50 via-blue-50 to-white px-6">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-        <div className="flex justify-center mb-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#FFFBEA] px-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 border border-[#fef3c7]">
+        <div className="flex justify-center mb-6">
           <Image
-            src="/camelvet-logo.svg"
+            src="/camelvet.png"
             alt="CamelVet Logo"
-            width={180}
-            height={60}
+            width={120}
+            height={120}
+            className="rounded-xl"
             priority
           />
         </div>
 
-        <h1 className="text-3xl font-semibold text-center text-green-800 mb-6">
+        <h1 className="text-2xl font-semibold text-center text-[#1E293B] mb-4">
           Bem-vindo ao CamelVet
         </h1>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          <label className="flex flex-col text-gray-700 font-medium">
-            Email
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="seu@email.com"
-              className="mt-1 rounded border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
-            />
-          </label>
+        <p className="text-center text-sm text-gray-600 mb-6">
+          Acesse sua conta para continuar
+        </p>
 
-          <label className="flex flex-col text-gray-700 font-medium">
-            Senha
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Sua senha"
-              className="mt-1 rounded border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
-            />
-          </label>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <input
+            type="email"
+            required
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="p-3 rounded border border-gray-300 focus:ring-2 focus:ring-[#FACC15] focus:outline-none"
+          />
+
+          <input
+            type="password"
+            required
+            placeholder="Senha"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="p-3 rounded border border-gray-300 focus:ring-2 focus:ring-[#FACC15] focus:outline-none"
+          />
 
           <button
             type="submit"
-            className="mt-6 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded transition"
-          >
+            className="bg-[#FEF08A] hover:bg-[#FDE047] text-[#1E293B] font-semibold py-3 rounded transition">
             Entrar
           </button>
         </form>
 
-        <p className="text-center text-sm text-gray-500 mt-6">
-          © 2025 CamelVet. Todos os direitos reservados.
+        <p className="text-center text-xs text-gray-500 mt-6">
+          © 2025 CamelVet — Todos os direitos reservados.
         </p>
       </div>
     </div>
