@@ -12,7 +12,7 @@ export const api = axios.create({
 
 const publicEndpoints = [
   "/cliente/cadastrar",
-  "/login/dashboard",
+  "/api/auth/login",
 ];
 
 api.interceptors.request.use((config) => {

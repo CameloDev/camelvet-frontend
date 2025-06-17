@@ -21,7 +21,7 @@ export default function Login() {
       const userData = await loginDashboard(email, password, remember);
       const token =
         userData?.token || userData?.accessToken || userData?.tokenJWT;
-      login(token, userData, remember, "/dashboard"); // redireciona para o painel
+      login(token, userData, remember, "/dashboard/selector"); 
     } catch (err: any) {
       setError(err.message || "Erro ao fazer login");
     }
