@@ -2,6 +2,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Fazenda } from "@/@types/fazenda";
+import { getFazendaById } from "@/http/api/fazenda/fazendaService";
 
 export default function FazendaDetalhesPage() {
   const router = useRouter();
@@ -9,13 +10,13 @@ export default function FazendaDetalhesPage() {
 
   const [fazenda, setFazenda] = useState<Fazenda | null>(null);
 
-  useEffect(() => {
+    useEffect(() => {
     if (id) {
-      fetch(`/api/fazendas/${id}`)
-        .then((res) => res.json())
-        .then((data) => setFazenda(data));
+        getFazendaById(id as string)
+        .then(setFazenda)
+        .catch((err) => console.error("Erro ao carregar a fazenda:", err));
     }
-  }, [id]);
+    }, [id]);
 
   if (!fazenda) return <p>Carregando...</p>;
 
