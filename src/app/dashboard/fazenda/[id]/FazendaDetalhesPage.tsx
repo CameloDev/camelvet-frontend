@@ -61,7 +61,7 @@ export default function FazendaDetalhesPage() {
 
         <div className="mt-6 flex justify-center">
           <button
-            onClick={() => alert("Em breve: editar fazenda")}
+            onClick={() => alert("Em breve: editar fazenda vou fazer um request para ver quem é o ademiro")}
             className="bg-[#FEF08A] hover:bg-[#FDE047] transition px-6 py-2 rounded-lg text-[#1E293B] font-semibold shadow-sm"
           >
             Editar
