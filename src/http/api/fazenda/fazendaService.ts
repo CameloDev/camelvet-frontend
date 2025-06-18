@@ -6,7 +6,8 @@ export const getFazendasDoUsuario = async () => {
 };
 export const getFazendaById = async (fazenda_id: string) => {
   try {
-    const response = await api.get(`/api/fazenda/dashboard/${fazenda_id}`);
+    const response = await api.get(`/api/fazenda/${fazenda_id}`);
+    console.log("Fazendas retornadas:", response.data);
     return response.data;
   } catch (error) {
     console.error(`Erro ao buscar fazenda com ID ${fazenda_id}:`, error);

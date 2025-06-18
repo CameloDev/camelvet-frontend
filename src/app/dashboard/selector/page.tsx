@@ -21,7 +21,7 @@ export default function FazendaSelectorPage() {
         if (data.length === 0) {
           router.replace("/fazenda/criar");
         } else if (data.length === 1) {
-          router.replace(`/fazenda/${data[0].fazenda_id}`);
+          router.replace(`/dashboard/fazenda/${data[0].fazenda_id}`);
         } else {
           setLoading(false);
         }
