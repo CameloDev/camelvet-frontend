@@ -1,72 +1,81 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { Fazenda } from "@/@types/fazenda";
+import { useEffect, useState } from "react";
+import Sidebar from "@/components/Sidebar";
+import Topbar from "@/components/Topbar";
+import DashboardCard from "@/components/DashboardCard";
 import { getFazendaById } from "@/http/api/fazenda/fazendaService";
+import type { Fazenda } from "@/@types/fazenda";
 
-export default function FazendaDetalhesPage() {
+export default function FazendaDashboardPage() {
   const params = useParams();
-  const id = params?.id as string;
-
+  const fazendaId = params?.id as string;
   const [fazenda, setFazenda] = useState<Fazenda | null>(null);
 
   useEffect(() => {
-    if (id) {
-      getFazendaById(id)
+    if (fazendaId) {
+      getFazendaById(fazendaId)
         .then(setFazenda)
         .catch((err) =>
-          console.error("Erro ao carregar a fazenda:", err)
+          console.error("Erro ao buscar detalhes da fazenda:", err)
         );
     }
-  }, [id]);
-
-  if (!fazenda) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FFFBEA]">
-        <p className="text-lg text-[#1E293B]">Carregando fazenda...</p>
-      </div>
-    );
-  }
+  }, [fazendaId]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FFFBEA]">
-      <div className="bg-white shadow-md rounded-xl p-8 w-full max-w-md">
-        <h1 className="text-2xl font-bold text-[#1E293B] mb-4 text-center">
-          Fazenda Selecionada
-        </h1>
+    <div className="flex min-h-screen bg-[#F2F9FC]">
+      <Sidebar />
+      <div className="flex-1 flex flex-col">
+        <Topbar />
+        <main className="p-6">
+          <div className="max-w-7xl mx-auto">
+            <h1 className="text-2xl font-bold text-[#2078BF] mb-6 font-ubuntu">
+              {fazenda ? "Olá Camelo Dev" : "Carregando..."}
+            </h1>
 
-        <div className="space-y-3">
-          <div>
-            <p className="text-sm text-[#64748B]">ID da Fazenda</p>
-            <p className="text-lg text-[#1E293B] font-medium">
-              {fazenda.fazenda_id}
-            </p>
+            {/* DASHBOARD CARDS */}
+            <section className="mt-10">
+              <h2 className="text-xl font-semibold text-[#2078BF] mb-4 font-ubuntu">
+                Acesso rápido
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 font-ubuntu">
+                <DashboardCard
+                  title="Animais"
+                  iconSrc="/icons/animais.png"
+                  href={`/dashboard/fazenda/${fazendaId}/animais`}
+                />
+                <DashboardCard
+                  title="Vacinas"
+                  iconSrc="/icons/vacinas.png"
+                  href={`/dashboard/fazenda/${fazendaId}/vacinas`}
+                />
+                <DashboardCard
+                  title="Funcionários"
+                  iconSrc="/icons/funcionarios.png"
+                  href={`/dashboard/fazenda/${fazendaId}/funcionarios`}
+                />
+                <DashboardCard
+                  title="Estatísticas"
+                  iconSrc="/icons/estatisticas.png"
+                  href={`/dashboard/fazenda/${fazendaId}/estatisticas`}
+                />
+              </div>
+            </section>
+
+            {/* VACINAS (placeholder futuro) */}
+            <section className="mt-10">
+              <h2 className="text-xl font-semibold text-[#2078BF] mb-4 font-ubuntu">
+                Vacinas
+              </h2>
+              <div className="bg-white shadow-lg rounded-xl p-6">
+                <p className="text-gray-500">
+                  Exibir vacinas da fazenda {fazenda?.nome || fazendaId}...
+                </p>
+              </div>
+            </section>
           </div>
-
-          <div>
-            <p className="text-sm text-[#64748B]">Nome</p>
-            <p className="text-lg text-[#1E293B] font-medium">
-              {fazenda.nome}
-            </p>
-          </div>
-
-          <div>
-            <p className="text-sm text-[#64748B]">Localização</p>
-            <p className="text-lg text-[#1E293B] font-medium">
-              {fazenda.localizacao}
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-6 flex justify-center">
-          <button
-            onClick={() => alert("Em breve: editar fazenda vou fazer um request para ver quem é o ademiro")}
-            className="bg-[#FEF08A] hover:bg-[#FDE047] transition px-6 py-2 rounded-lg text-[#1E293B] font-semibold shadow-sm"
-          >
-            Editar
-          </button>
-        </div>
+        </main>
       </div>
     </div>
   );
