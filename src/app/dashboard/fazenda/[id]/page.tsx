@@ -1,13 +1,27 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import Sidebar from "@/components/Sidebar";
-import Topbar from "@/components/TopBar";
-import QuickLinks from "@/components/QuickLinks";
+import Topbar from "@/components/Topbar";
+import DashboardCard from "@/components/DashboardCard";
+import { getFazendaById } from "@/http/api/fazenda/fazendaService";
+import type { Fazenda } from "@/@types/fazenda";
 
 export default function FazendaDashboardPage() {
   const params = useParams();
-  const fazendaId = params?.id;
+  const fazendaId = params?.id as string;
+  const [fazenda, setFazenda] = useState<Fazenda | null>(null);
+
+  useEffect(() => {
+    if (fazendaId) {
+      getFazendaById(fazendaId)
+        .then(setFazenda)
+        .catch((err) =>
+          console.error("Erro ao buscar detalhes da fazenda:", err)
+        );
+    }
+  }, [fazendaId]);
 
   return (
     <div className="flex min-h-screen bg-[#F2F9FC]">
@@ -16,18 +30,46 @@ export default function FazendaDashboardPage() {
         <Topbar />
         <main className="p-6">
           <h1 className="text-2xl font-bold text-[#2078BF] mb-6">
-            Dashboard da Fazenda #{fazendaId}
+            {fazenda ? `Dashboard da Fazenda ${fazenda.nome}` : "Carregando..."}
           </h1>
+          {/* DASHBOARD CARDS */}
+          <section className="mt-10">
+            <h2 className="text-xl font-semibold text-[#2078BF] mb-4">
+              Acesso rápido
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <DashboardCard
+                title="Animais"
+                iconSrc="/icons/animais.png"
+                href={`/dashboard/fazenda/${fazendaId}/animais`}
+              />
+              <DashboardCard
+                title="Vacinas"
+                iconSrc="/icons/vacinas.png"
+                href={`/dashboard/fazenda/${fazendaId}/vacinas`}
+              />
+              <DashboardCard
+                title="Funcionários"
+                iconSrc="/icons/funcionarios.png"
+                href={`/dashboard/fazenda/${fazendaId}/funcionarios`}
+              />
+              <DashboardCard
+                title="Estatísticas"
+                iconSrc="/icons/estatisticas.png"
+                href={`/dashboard/fazenda/${fazendaId}/estatisticas`}
+              />
+            </div>
+          </section>
 
-          <QuickLinks />
-
+          {/* VACINAS (placeholder futuro) */}
           <section className="mt-10">
             <h2 className="text-xl font-semibold text-[#2078BF] mb-4">
               Vacinas
             </h2>
             <div className="bg-white shadow-lg rounded-xl p-6">
-              {/* Tabela ou cards de vacinas */}
-              <p className="text-gray-500">Exibir vacinas da fazenda {fazendaId}...</p>
+              <p className="text-gray-500">
+                Exibir vacinas da fazenda {fazenda?.nome || fazendaId}...
+              </p>
             </div>
           </section>
         </main>
