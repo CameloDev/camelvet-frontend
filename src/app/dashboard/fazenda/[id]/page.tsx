@@ -29,49 +29,52 @@ export default function FazendaDashboardPage() {
       <div className="flex-1 flex flex-col">
         <Topbar />
         <main className="p-6">
-          <h1 className="text-2xl font-bold text-[#2078BF] mb-6">
-            {fazenda ? `Dashboard da Fazenda ${fazenda.nome}` : "Carregando..."}
-          </h1>
-          {/* DASHBOARD CARDS */}
-          <section className="mt-10">
-            <h2 className="text-xl font-semibold text-[#2078BF] mb-4">
-              Acesso rápido
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <DashboardCard
-                title="Animais"
-                iconSrc="/icons/animais.png"
-                href={`/dashboard/fazenda/${fazendaId}/animais`}
-              />
-              <DashboardCard
-                title="Vacinas"
-                iconSrc="/icons/vacinas.png"
-                href={`/dashboard/fazenda/${fazendaId}/vacinas`}
-              />
-              <DashboardCard
-                title="Funcionários"
-                iconSrc="/icons/funcionarios.png"
-                href={`/dashboard/fazenda/${fazendaId}/funcionarios`}
-              />
-              <DashboardCard
-                title="Estatísticas"
-                iconSrc="/icons/estatisticas.png"
-                href={`/dashboard/fazenda/${fazendaId}/estatisticas`}
-              />
-            </div>
-          </section>
+          <div className="max-w-7xl mx-auto">
+            <h1 className="text-2xl font-bold text-[#2078BF] mb-6 font-ubuntu">
+              {fazenda ? "Olá Camelo Dev" : "Carregando..."}
+            </h1>
 
-          {/* VACINAS (placeholder futuro) */}
-          <section className="mt-10">
-            <h2 className="text-xl font-semibold text-[#2078BF] mb-4">
-              Vacinas
-            </h2>
-            <div className="bg-white shadow-lg rounded-xl p-6">
-              <p className="text-gray-500">
-                Exibir vacinas da fazenda {fazenda?.nome || fazendaId}...
-              </p>
-            </div>
-          </section>
+            {/* DASHBOARD CARDS */}
+            <section className="mt-10">
+              <h2 className="text-xl font-semibold text-[#2078BF] mb-4 font-ubuntu">
+                Acesso rápido
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 font-ubuntu">
+                <DashboardCard
+                  title="Animais"
+                  iconSrc="/icons/animais.png"
+                  href={`/dashboard/fazenda/${fazendaId}/animais`}
+                />
+                <DashboardCard
+                  title="Vacinas"
+                  iconSrc="/icons/vacinas.png"
+                  href={`/dashboard/fazenda/${fazendaId}/vacinas`}
+                />
+                <DashboardCard
+                  title="Funcionários"
+                  iconSrc="/icons/funcionarios.png"
+                  href={`/dashboard/fazenda/${fazendaId}/funcionarios`}
+                />
+                <DashboardCard
+                  title="Estatísticas"
+                  iconSrc="/icons/estatisticas.png"
+                  href={`/dashboard/fazenda/${fazendaId}/estatisticas`}
+                />
+              </div>
+            </section>
+
+            {/* VACINAS (placeholder futuro) */}
+            <section className="mt-10">
+              <h2 className="text-xl font-semibold text-[#2078BF] mb-4 font-ubuntu">
+                Vacinas
+              </h2>
+              <div className="bg-white shadow-lg rounded-xl p-6">
+                <p className="text-gray-500">
+                  Exibir vacinas da fazenda {fazenda?.nome || fazendaId}...
+                </p>
+              </div>
+            </section>
+          </div>
         </main>
       </div>
     </div>
