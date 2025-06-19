@@ -37,20 +37,21 @@ export default function FazendaSelectorPage() {
     router.push(`/dashboard/fazenda/${id}`);
   };
 
-  if (loading) return <p className="p-4">Carregando fazendas...</p>;
+  if (loading) return <p className="p-4 text-center text-[#2078BF] font-medium">Carregando fazendas...</p>;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FFFBEA]">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-        <h2 className="text-xl font-semibold mb-4 text-center text-[#1E293B]">
+    <div className="min-h-screen flex items-center justify-center bg-[#F2F9FC] px-4">
+      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md border border-[#8FBBDF]">
+        <h2 className="text-2xl font-semibold mb-6 text-center text-[#2078BF]">
           Selecione uma fazenda
         </h2>
-        <ul className="space-y-3">
+
+        <ul className="space-y-4">
           {fazendas.map((fazenda) => (
             <li key={fazenda.fazenda_id}>
               <button
                 onClick={() => handleSelect(fazenda.fazenda_id)}
-                className="w-full bg-[#FEF08A] hover:bg-[#FDE047] py-3 px-4 rounded text-[#1E293B] font-medium transition"
+                className="w-full bg-[#2078BF] hover:bg-[#00C3FF] text-white py-3 px-4 rounded-lg font-semibold shadow transition"
               >
                 {fazenda.nome}
               </button>

@@ -1,72 +1,36 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { Fazenda } from "@/@types/fazenda";
-import { getFazendaById } from "@/http/api/fazenda/fazendaService";
+import Sidebar from "@/components/Sidebar";
+import Topbar from "@/components/TopBar";
+import QuickLinks from "@/components/QuickLinks";
 
-export default function FazendaDetalhesPage() {
+export default function FazendaDashboardPage() {
   const params = useParams();
-  const id = params?.id as string;
-
-  const [fazenda, setFazenda] = useState<Fazenda | null>(null);
-
-  useEffect(() => {
-    if (id) {
-      getFazendaById(id)
-        .then(setFazenda)
-        .catch((err) =>
-          console.error("Erro ao carregar a fazenda:", err)
-        );
-    }
-  }, [id]);
-
-  if (!fazenda) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FFFBEA]">
-        <p className="text-lg text-[#1E293B]">Carregando fazenda...</p>
-      </div>
-    );
-  }
+  const fazendaId = params?.id;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FFFBEA]">
-      <div className="bg-white shadow-md rounded-xl p-8 w-full max-w-md">
-        <h1 className="text-2xl font-bold text-[#1E293B] mb-4 text-center">
-          Fazenda Selecionada
-        </h1>
+    <div className="flex min-h-screen bg-[#F2F9FC]">
+      <Sidebar />
+      <div className="flex-1 flex flex-col">
+        <Topbar />
+        <main className="p-6">
+          <h1 className="text-2xl font-bold text-[#2078BF] mb-6">
+            Dashboard da Fazenda #{fazendaId}
+          </h1>
 
-        <div className="space-y-3">
-          <div>
-            <p className="text-sm text-[#64748B]">ID da Fazenda</p>
-            <p className="text-lg text-[#1E293B] font-medium">
-              {fazenda.fazenda_id}
-            </p>
-          </div>
+          <QuickLinks />
 
-          <div>
-            <p className="text-sm text-[#64748B]">Nome</p>
-            <p className="text-lg text-[#1E293B] font-medium">
-              {fazenda.nome}
-            </p>
-          </div>
-
-          <div>
-            <p className="text-sm text-[#64748B]">Localização</p>
-            <p className="text-lg text-[#1E293B] font-medium">
-              {fazenda.localizacao}
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-6 flex justify-center">
-          <button
-            onClick={() => alert("Em breve: editar fazenda vou fazer um request para ver quem é o ademiro")}
-            className="bg-[#FEF08A] hover:bg-[#FDE047] transition px-6 py-2 rounded-lg text-[#1E293B] font-semibold shadow-sm"
-          >
-            Editar
-          </button>
-        </div>
+          <section className="mt-10">
+            <h2 className="text-xl font-semibold text-[#2078BF] mb-4">
+              Vacinas
+            </h2>
+            <div className="bg-white shadow-lg rounded-xl p-6">
+              {/* Tabela ou cards de vacinas */}
+              <p className="text-gray-500">Exibir vacinas da fazenda {fazendaId}...</p>
+            </div>
+          </section>
+        </main>
       </div>
     </div>
   );
