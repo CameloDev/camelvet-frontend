@@ -30,17 +30,16 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F2F9FC] px-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 border border-[#8FBBDF]">
-        <div className="flex justify-center mb-6">
-          <Image
-            src="/camelvet.png"
-            alt="CamelVet Logo"
-            width={120}
-            height={120}
-            className="rounded-xl"
-            priority
-          />
-        </div>
-
+          <div className="flex justify-center items-center h-[100px] mb-4">
+            <Image
+              src="/LogoTransparenteCamelVet.png"
+              alt="Logo do sistema CamelVet"
+              width={160}
+              height={100}
+              className="object-contain"
+              priority
+            />
+          </div>
         <h1 className="text-2xl font-semibold text-center text-[#2078BF] mb-4">
           Bem-vindo ao CamelVet
         </h1>
