@@ -7,6 +7,7 @@ import Topbar from "@/components/Topbar";
 import DashboardCard from "@/components/DashboardCard";
 import { getFazendaById } from "@/http/api/fazenda/fazendaService";
 import type { Fazenda } from "@/@types/fazenda";
+import AnimaisSection from "@/components/animal/AnimalSection";
 
 export default function FazendaDashboardPage() {
   const params = useParams();
@@ -74,6 +75,8 @@ export default function FazendaDashboardPage() {
                 </p>
               </div>
             </section>
+            {/* ANIMAIS */}
+           <AnimaisSection fazendaId={fazenda?.fazenda_id || fazendaId} fazendaNome={fazenda?.nome} />
           </div>
         </main>
       </div>
