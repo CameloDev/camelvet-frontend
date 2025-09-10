@@ -1,8 +1,8 @@
 import api from '@/lib/axios';
-import { Animal } from '@/@types/animalPost';
+import { AnimalPost } from '@/@types/animalPost';
 import { AxiosError } from "axios";
 
-export const adicionarAnimal = async (fazendaId: number, data: Animal) => {
+export const adicionarAnimal = async (fazendaId: number, data: AnimalPost) => {
   try {
     const response = await api.post(`/api/animal/${fazendaId}`, data);
     return response.data;
@@ -29,7 +29,7 @@ export const adicionarAnimal = async (fazendaId: number, data: Animal) => {
     }
   }
 };
-export const listarAnimaisPorFazenda = async (fazendaId: number): Promise<Animal[]> => {
+export const listarAnimaisPorFazenda = async (fazendaId: number): Promise<AnimalPost[]> => {
   const response = await api.get(`/api/animal/fazenda/${fazendaId}`);
   return response.data;
 };
